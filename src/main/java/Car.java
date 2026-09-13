@@ -5,7 +5,7 @@ public abstract class Car implements Vehicle {
     private final int fuelTankSize;
     private final String fuelType;
     private final int gears;
-    private final float consumptionPer100km;
+    private final double consumptionPer100km;
     private final String chassisNumber;
 
     private int aviableFuel;
@@ -14,7 +14,7 @@ public abstract class Car implements Vehicle {
     private boolean isStart;
     private int currentGear;
     private float totalKm;
-    private int  totalFuelUsed;
+    private int totalFuelUsed;
 
 
     public Car(int aviableFuel, String chassisNumber, int fuelTankSize, String fuelType, int gears, float consumptionPer100km) {
@@ -42,22 +42,22 @@ public abstract class Car implements Vehicle {
     }
 
     @Override
-    public void drive(float km) {
+    public void drive(double km) {
 
-        if(!isStart){
+        if (!isStart) {
             System.out.println("You need to start the engine!");
         }
 
-        float fuelNeeded = (consumptionPer100km/100)+km;
-        aviableFuel -=fuelNeeded;
+        double fuelNeeded = (consumptionPer100km / 100) + km;
+        aviableFuel -= fuelNeeded;
         totalFuelUsed += fuelNeeded;
-        totalKm +=km;
+        totalKm += km;
 
     }
 
-    public void shiftGear(int gear){
-        if(isStart && gear <= gears){
-            this.currentGear=gear;
+    public void shiftGear(int gear) {
+        if (isStart && gear <= gears) {
+            this.currentGear = gear;
         }
 
     }
@@ -66,17 +66,16 @@ public abstract class Car implements Vehicle {
         return aviableFuel;
     }
 
-    public float getAverageFuelCons(){
-        if (totalKm==0){
-            return 0;}
-        else {
-            return (totalFuelUsed/totalKm)*100;
+    public float getAverageFuelCons() {
+        if (totalKm == 0) {
+            return 0;
+        } else {
+            return (totalFuelUsed / totalKm) * 100;
         }
     }
 
-    public void setTireSize(int tireSize){
+    public void setTireSize(int tireSize) {
         this.tireSize = tireSize;
     }
 
-    public abstract void drive(double v);
 }
